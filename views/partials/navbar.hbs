@@ -1,0 +1,19 @@
+<nav>
+    <ul>
+        <li><a href="/about">Logo</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/newproject">Submit your project</a></li>
+    </ul>
+    {{#if currentUser}}
+        <ul>
+            <li>Hola, {{currentUser}}</li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    {{else}}
+        <ul>
+            <li><a href="/signup">Signup</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    {{/if}}
+</nav>

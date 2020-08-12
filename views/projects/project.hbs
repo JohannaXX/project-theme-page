@@ -1,0 +1,38 @@
+<div id="project-details-page">
+    <div class="row project-card">
+        <div class="col-3 project-card-left">
+            <img id="profile-image" src="{{project.user.avatar}}" alt="profile image"> 
+            <p>{{project.user.name}}</p>
+        </div>
+        <div class="col-9 project-card-right">
+            <div>
+                <button onclick="history.back()">Back</button>
+            </div>
+            <h3>{{project.title}}</h3>
+            <p>{{project.body}}</p>
+            <div class="comments-likes-area">
+                <p> Likes: {{project.likes.length}}</p>
+                <a href="/project/{{project._id}}/like">Like</a>
+            </div>
+            <div class="comments-header">Comments:</div>
+            <div id="comment-btn-area">
+                <a href="">Add comment</a>
+            </div>
+            {{#if project.comments}}
+                {{#each project.comments as |comment|}}
+                    <div class="row project-card comment-container">
+                        <div class="col-3">
+                            <img src="{{comment.user.avatar}}" alt="profile image"> 
+                            <p>{{comment.user.name}}</p>
+                        </div>
+                        <div class="col-9 comment-text">
+                            <p>{{comment.text}}</p>
+                        </div>
+                    
+                    </div>
+                {{/each}}
+            {{/if}}
+            
+        </div>
+    </div>
+</div>

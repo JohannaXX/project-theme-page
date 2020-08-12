@@ -1,0 +1,36 @@
+<div id="index-page-container">
+    <div id="index-page-heading">
+        <h1>Springfield University</h1>
+        <h2>Win your scholarship and fundings by presenting an innovative project.</h2>
+
+        <p>The project with the highest amount of likes wins. You can give up to 3 likes, but not for your own project.</p>
+
+        <br>
+
+        <h3>Projects:</h3>
+    </div>
+
+    {{#if projects}} 
+        {{#each projects as |project|}}
+            
+            <div class="row project-card">
+                <div class="col-3 project-card-left">
+                    {{!-- <img style="width: 200px;" src="https://res.cloudinary.com/dlydr4pqa/image/upload/v1595671073/tweethack/k8mjdzah3qqxnebmxdlr.png" alt="profile image"> --}}
+                    <img src="{{project.user.avatar}}" alt="profile image"> 
+                    <p>{{project.user.name}}</p>
+                </div>
+                <div class="col-9 project-card-right">
+                    <h3>{{project.title}}</h3>
+                    <p>{{project.body}}</p>
+                    <div class="comments-likes-area">
+                        <span>Likes: {{project.likes.length}}</span>
+                        <span>- Comments: {{project.comments.length}}</span>
+                    </div>
+                    <div>
+                        <a href="/project/{{project._id}}">View project</a>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    {{/if}}
+</div>

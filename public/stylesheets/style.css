@@ -1,0 +1,190 @@
+html, body {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+a,
+button {
+  margin: 1rem auto;
+  padding: 0.5rem 1rem;
+  background-color: black;
+  color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+a:hover,
+button:hover {
+  background-color: white;
+  color: black;
+  text-decoration: none;
+}
+
+.project-card {
+  border: 1px solid #e2e2e2;
+  border-radius: 5px;
+}
+
+nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background-color: black;
+}
+
+nav ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+nav ul li {
+  margin: 12px 10px 0px;
+  text-decoration: none;
+}
+
+#index-page-container #index-page-heading {
+  text-align: center;
+  margin: 2rem auto;
+}
+
+#index-page-container #index-page-heading h2 {
+  display: block;
+  margin: 1rem auto;
+}
+
+#index-page-container img {
+  width: 150px;
+  border-radius: 50%;
+}
+
+.project-card {
+  margin: 1rem auto;
+}
+
+.project-card .project-card-left {
+  padding: 1rem;
+  text-align: center;
+}
+
+.project-card .project-card-left img {
+  margin: 1rem;
+  border: 1px solid #e2e2e2;
+  width: 200px;
+  height: auto;
+}
+
+.project-card .project-card-left p {
+  margin: 0 1rem 1rem;
+}
+
+.project-card .project-card-right {
+  padding: 1rem;
+}
+
+.project-card .project-card-right h3 {
+  display: inline-block;
+  margin: 1rem 0;
+  line-height: 2rem;
+  border-bottom: 1px solid black;
+}
+
+.project-card .project-card-right div {
+  text-align: center;
+}
+
+.project-card .project-card-right .comments-likes-area {
+  color: grey;
+  text-align: left;
+}
+
+.project-card .project-card-right a {
+  display: inline-block;
+}
+
+#new-project-page-container h3,
+#new-project-page-container p {
+  margin: 2rem 0;
+}
+
+#new-project-page-container #btn-area {
+  text-align: center;
+}
+
+#new-project-page-container #btn-area #submit-new-project-btn {
+  display: inline-block;
+  margin: 1rem auto;
+  padding: 0.5rem 1rem;
+  background-color: black;
+  color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+#new-project-page-container #btn-area #submit-new-project-btn:hover {
+  background-color: white;
+  color: black;
+  text-decoration: none;
+}
+
+#signup-page-container h2,
+#signup-page-container p {
+  margin: 2rem auto;
+  text-align: center;
+}
+
+#signup-page-container #signup-btn-area {
+  text-align: center;
+}
+
+#login-page-container h2 {
+  margin: 2rem auto;
+  text-align: center;
+}
+
+#login-page-container #login-btn-area {
+  margin: 1rem auto;
+  text-align: center;
+}
+
+#login-page-container #login-btn-area #social-login-btns {
+  margin: 1rem auto;
+}
+
+#project-details-page #profile-image {
+  border-radius: 50%;
+}
+
+#project-details-page .comments-header {
+  text-align: center;
+  margin: 1rem auto 0.5rem;
+}
+
+#project-details-page .comment-btn-area {
+  text-align: center;
+}
+
+#project-details-page .comment-container {
+  padding: 1rem 0;
+}
+
+#project-details-page .comment-container img {
+  border-radius: 50%;
+  width: 80px;
+  height: auto;
+}
+
+#project-details-page .comment-container .comment-text {
+  text-align: left;
+}
+/*# sourceMappingURL=style.css.map */
