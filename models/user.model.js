@@ -59,7 +59,8 @@ const userSchema = new mongoose.Schema({
     slack: String,
     google: String
   },
-  googleID: String
+  googleID: String,
+  projects: [String]
 });
 
 userSchema.pre('save', function (next) {

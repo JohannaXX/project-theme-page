@@ -45,9 +45,11 @@ nav {
     ul {
         display: flex;
         flex-wrap: wrap;
+        list-style-type: none;
         li {
             margin: 12px 10px 0px;
             text-decoration: none;
+            color: white !important;
         }
     }
 }
@@ -152,7 +154,7 @@ nav {
 }
 
 #project-details-page {
-    #profile-image {
+    .profile-image {
         border-radius: 50%;
     }
     .comments-header {
@@ -174,7 +176,6 @@ nav {
         }
     }
 }
-
 
 
 

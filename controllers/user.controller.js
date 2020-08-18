@@ -4,11 +4,53 @@ const nodemailer = require('../config/mailer.config');
 const passport = require('passport');
 
 module.exports.showSignupPage = (req, res, next) => {
-    res.render('users/signup')
+    res.render('users/userform')
 }
 
 module.exports.showLoginPage = (req, res, next) => {
     res.render('users/login')
+}
+
+module.exports.doLogin = (req, res, next) => {
+    User.findOne({ email: req.body.email })
+        .then(user => {
+            if (user) {
+                user.checkPassword(req.body.password)
+                    .then(match => {
+                        if (match) {
+                            if (user.activation.active) {
+                                req.session.userId = user._id;
+                                res.redirect('/projects')
+                        } else {
+                            res.render('users/login', {
+                                error: {
+                                    validation: {
+                                        message: 'Your account is not active, check your email!'
+                                    }
+                                }
+                            })
+                        }
+                        } else {
+                        res.render('users/login', {
+                            error: {
+                                email: {
+                                    message: 'user not found'
+                                }
+                            }
+                        })
+                        }
+                    })
+            } else {
+                res.render("users/login", {
+                    error: {
+                        email: {
+                            message: "user not found",
+                        },
+                    },
+                });
+            }
+        })
+        .catch(next)
 }
 
 module.exports.loginWithSlack = (req, res, next) => {
@@ -17,7 +59,7 @@ module.exports.loginWithSlack = (req, res, next) => {
         next(error);
       } else {
         req.session.userId = user._id;
-        res.redirect("/");
+        res.redirect('/projects');
       }
     })
     
@@ -31,7 +73,6 @@ module.exports.loginWithGmail = (req, res, next) => {
         "https://www.googleapis.com/auth/userinfo.email"
         ]
     })
-
     passportGoogleLogin(req, res, next)
 }
 
@@ -41,55 +82,12 @@ module.exports.getLoginWithGmail = (req, res, next) => {
             next(error);
         } else {
             req.session.userId = user._id;
-            res.redirect("/");
+            res.redirect('/projects');
         }
     })
     passportGoogleController(req, res, next)
 }
 
-
-module.exports.doLogin = (req, res, next) => {
-    User.findOne({ email: req.body.email })
-        .then(user => {
-        if (user) {
-            user.checkPassword(req.body.password)
-            .then(match => {
-                if (match) {
-                if (user.activation.active) {
-                    req.session.userId = user._id
-
-                    res.redirect('/tweets')
-                } else {
-                    res.render('users/login', {
-                    error: {
-                        validation: {
-                        message: 'Your account is not active, check your email!'
-                        }
-                    }
-                    })
-                }
-                } else {
-                res.render('users/login', {
-                    error: {
-                    email: {
-                        message: 'user not found'
-                    }
-                    }
-                })
-                }
-            })
-        } else {
-            res.render("users/login", {
-            error: {
-                email: {
-                message: "user not found",
-                },
-            },
-            });
-        }
-        })
-        .catch(next)
-}
 
 module.exports.createUser = (req, res, next) => {
     const userParams = req.body;
@@ -98,53 +96,53 @@ module.exports.createUser = (req, res, next) => {
 
     user.save()
         .then(user => {
-        nodemailer.sendValidationEmail(user.email, user.activation.token, user.name);
-        res.render('users/login', {
-            message: 'Check your email for activation'
-        })
+            nodemailer.sendValidationEmail(user.email, user.activation.token, user.name);
+            res.render('users/login', {
+                message: 'Check your email for activation'
+            })
         })
         .catch((error) => {
-        if (error instanceof mongoose.Error.ValidationError) {
-            res.render("users/signup", { error: error.errors, user });
-        } else if (error.code === 11000) { // error when duplicated user
-            res.render("users/signup", {
-            user,
-            error: {
-                email: {
-                message: 'user already exists'
+            if (error instanceof mongoose.Error.ValidationError) {
+                res.render("users/userform", { error: error.errors, user });
+            } else if (error.code === 11000) { // error when duplicated user
+                res.render("users/userform", {
+                user,
+                error: {
+                    email: {
+                        message: 'user already exists'
+                    }
                 }
+                });
+            } else {
+                next(error);
             }
-            });
-        } else {
-            next(error);
-        }
-        })
+            })
         .catch(next)
 }
 
 module.exports.activateUser = (req, res, next) => {
     User.findOne({ "activation.token": req.params.token })
         .then(user => {
-        if (user) {
-            user.activation.active = true;
-            user.save()
-            .then(user => {
+            if (user) {
+                user.activation.active = true;
+                user.save()
+                    .then(() => {
+                        res.render('users/login', {
+                            message: 'Your account has been activated. You can log in now.'
+                        })
+                    })
+                    .catch(err => next(err))
+            } else {
                 res.render('users/login', {
-                    message: 'Your account has been activated, log in below!'
+                    error: {
+                        validation: {
+                            message: 'Invalid link'
+                        }
+                    }
                 })
-            })
-            .catch(e => next)
-        } else {
-            res.render('users/login', {
-            error: {
-                validation: {
-                message: 'Invalid link'
-                }
             }
-            })
-        }
         })
-        .catch(e => next)
+        .catch(err => next(err))
 }
 
 module.exports.logout = (req, res, next) => {
@@ -152,3 +150,58 @@ module.exports.logout = (req, res, next) => {
 
     res.redirect('/login')
 }
+
+module.exports.showUserProfilePage = (req, res, next) => {
+    const { id } = req.params;
+    User.findById(id)
+        .populate('projects')
+        .then(user => {
+
+            res.render('users/user', { user })
+        })
+        .catch(err => next(err))
+}
+
+module.exports.showEditProfile = (req, res, next) => {
+    const { id } = req.params;
+    User.findById(id)
+        .then(user => {
+            res.render('users/userform', { user })
+        })
+        .catch(err => next(err))
+}
+
+module.exports.updateProfile = (req, res, next) => {
+    const userParams = req.body;
+
+    if( req.file ) {
+        userParams.avatar = req.file.path;
+    }
+
+    User.findByIdAndUpdate(req.params.id, userParams, { runValidators: true, new: true })
+        .then(user => {
+            if (user) {
+                console.log('updated User: ', user);
+                res.redirect(`/user/${user._id}`)
+            } else {
+                res.redirect('/projects')
+            }
+        })
+        .catch(err => next(err))
+}
+
+module.exports.deleteProfile = (req, res, next) => {
+    User.findByIdAndDelete(req.params.id)
+        .then(() => {
+            req.currentUser.remove()
+              .then(() => {
+                req.session.destroy()
+                res.redirect('/login')
+              })
+              .catch(err => next(err))
+        })
+        .catch(err => next(err))
+}
+
+
+

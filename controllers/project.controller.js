@@ -6,17 +6,34 @@ module.exports.showNewProjectForm = (req, res, next) => {
 
 module.exports.showMainProjectList = (req, res) => { 
     Project.find()
-        .populate('user')
-        .populate('comments')
-        .populate('likes')
-        .then( projects => {
-            res.render('index', { projects }) 
-        })
+      .sort({ createdAt: -1 })
+      .populate('user')
+      .populate('comments')
+      .populate('likes')
+      .then( projects => {
+          res.render('index', { projects }) 
+      })
+}
+
+module.exports.createNewProject = (req, res, next) => {
+  const projectParams = req.body;
+  projectParams.user = req.currentUser;
+  projectParams.image = req.file ? req.file.path : undefined;
+
+  console.log(projectParams);
+  
+  const project = new Project(projectParams);
+
+
+  project.save()
+    .then(() => {
+      res.redirect('/projects');
+    })
 }
 
 module.exports.viewProject = (req, res) => {
-    const projectId = req.params.projectid;
-    Project.findById( projectId )
+    const { id } = req.params;
+    Project.findById( id )
         .populate('user')
         .populate({
             path: 'comments',
@@ -29,9 +46,9 @@ module.exports.viewProject = (req, res) => {
 }
 
 module.exports.like = (req, res, next) => {
-
     res.send(req.params);
-    /* const params = { user: req.currentUser._id, project: req.params.id  };
+    
+    const params = { user: req.currentUser._id, project: req.params.id  };
 
     Like.findOne(params)
       .then(like => {
@@ -50,5 +67,5 @@ module.exports.like = (req, res, next) => {
             .catch(next);
         }
       })
-      .catch(next); */
+      .catch(next);
   }

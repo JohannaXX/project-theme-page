@@ -32,7 +32,7 @@ Promise.all([
 
                 const project = new Project({
                     user: user._id,
-                    title: faker.lorem.words() + Math.floor(Math.random() * 3),
+                    title: faker.lorem.words() + ' ' + Math.floor(Math.random() * 3),
                     body: faker.lorem.text(),
                     image: faker.random.image(),
                     createdAt: faker.date.past(),
@@ -40,6 +40,8 @@ Promise.all([
 
                 project.save()
                     .then(p => {
+                        user.projects.push(p._id);
+                        
                         for (let j = 0; Math.floor(Math.random() * 10); j++) {
                             const comments = new Comment({
                                 user: userIds[Math.floor(Math.random() * userIds.length)],

@@ -45,11 +45,13 @@ nav ul {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  list-style-type: none;
 }
 
 nav ul li {
   margin: 12px 10px 0px;
   text-decoration: none;
+  color: white !important;
 }
 
 #index-page-container #index-page-heading {
@@ -161,7 +163,7 @@ nav ul li {
   margin: 1rem auto;
 }
 
-#project-details-page #profile-image {
+#project-details-page .profile-image {
   border-radius: 50%;
 }
 
