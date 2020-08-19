@@ -13,7 +13,14 @@
             <p>Short description of yourself:</p>
             <p><i>{{user.bio}}</i></p>
             <br>
-            <a href="/newproject">Create new project</a>
+             <div id="user-profile-btn-area">
+                <a href="/user/{{user._id}}/edit">Edit profile</a>
+                <a href="/user/{{user._id}}/delete">Delete profile</a>
+            </div>
+            <br>
+            <div>
+                <a href="/newproject">Create new project</a>
+            </div>
             <h4>My projects:</h4>
             {{#if user.projects}}
                 {{#each user.projects as |project|}}
@@ -32,10 +39,6 @@
                     </div>
                 {{/each}}
             {{/if}}
-            <div id="user-profile-btn-area">
-                <a href="/user/{{user._id}}/edit">Edit profile</a>
-                <a href="/user/{{user._id}}/delete">Delete profile</a>
-            </div>
         </div>
     </div>
 </div>

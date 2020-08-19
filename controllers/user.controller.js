@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const User = require('../models/user.model');
+const Project = require('../models/project.model');
 const nodemailer = require('../config/mailer.config');
 const passport = require('passport');
 
@@ -156,7 +157,6 @@ module.exports.showUserProfilePage = (req, res, next) => {
     User.findById(id)
         .populate('projects')
         .then(user => {
-
             res.render('users/user', { user })
         })
         .catch(err => next(err))
@@ -181,7 +181,6 @@ module.exports.updateProfile = (req, res, next) => {
     User.findByIdAndUpdate(req.params.id, userParams, { runValidators: true, new: true })
         .then(user => {
             if (user) {
-                console.log('updated User: ', user);
                 res.redirect(`/user/${user._id}`)
             } else {
                 res.redirect('/projects')
@@ -202,6 +201,7 @@ module.exports.deleteProfile = (req, res, next) => {
         })
         .catch(err => next(err))
 }
+
 
 
 

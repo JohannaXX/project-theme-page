@@ -2,13 +2,20 @@
     <h3>Submit your project</h3>
     <p>Fill out the following form and describe your unique innovative project.</p>
 
+    {{#if message}}
+        <div class="alert alert-primary" role="alert">
+            {{message}}
+        </div>
+    {{/if}}
 
-    {{!-- <form action="newproject" method="POST" enctype="multipart/form-data"> --}}
-
+    {{#if project}}
+    <form action="/project/{{project._id}}/edit" method="POST" enctype="multipart/form-data" id="new-project-form">
+    {{else}}
     <form action="/newproject" method="POST" enctype="multipart/form-data" id="new-project-form">
+    {{/if}}
         <div class="form-group">
             <label for="title">Project name (mandatory):</label>
-            <input type="text" name="title" id="title" class="form-control {{#if error.title }}is-invalid{{/if}}">
+            <input type="text" name="title" id="title" class="form-control {{#if error.title }}is-invalid{{/if}}" value="{{project.title}}">
             
             {{#if error.title}}
                 <div class="invalid-feedback">
@@ -19,7 +26,7 @@
 
         <div class="form-group">
             <label for="body">Project description (mandatory):</label>
-            <textarea type="text" name="body" id="body" class="form-control {{#if error.body }}is-invalid{{/if}}" rows="10"></textarea>
+            <textarea type="text" name="body" id="body" class="form-control {{#if error.body }}is-invalid{{/if}}" rows="10">{{project.body}}</textarea>
             
             {{#if error.body}}
                 <div class="invalid-feedback">
@@ -38,9 +45,13 @@
                 </div>
             {{/if}}
         </div>
-
+        
         <div id="btn-area">
-            <button type="submit" id="submit-new-project-btn">Submit your project</button>
+            {{#if project}}
+                <button type="submit" id="submit-new-project-btn">Update your project</button>
+            {{else}}
+                <button type="submit" id="submit-new-project-btn">Submit your project</button>
+            {{/if}}
         </div>
 
     </form>

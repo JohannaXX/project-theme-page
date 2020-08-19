@@ -1,0 +1,29 @@
+<div id="comment-details-page">
+    <div class="row project-card">
+        <div class="col-3 project-card-left">
+            <img class="profile-image" src="{{comment.user.avatar}}" alt="profile image"> 
+            <p>{{comment.user.name}}</p>
+        </div>
+        <div class="col-9 project-card-right">
+
+            {{#if user }}
+                <form action="/comment/{{comment._id}}/edit" method="POST">
+                    <textarea name="text" type="text" class="form-control {{#if error.bio }}is-invalid{{/if}}" id="text"
+                placeholder="Write comment" rows="5">{{ comment.text }}</textarea>
+                    <div id="single-comment-btn-area">
+                        <button type="submit">Update</button>
+                        <a href="/comment/{{comment._id}}/{{comment.project._id}}/delete">Delete</a>
+                    </div>
+                </form>
+                
+            {{else}}
+                <p>{{ comment.text }}</p>
+            {{/if}}
+
+            <div>
+                <button onclick="history.back()">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>

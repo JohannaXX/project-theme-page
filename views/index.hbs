@@ -21,7 +21,8 @@
                 </div>
                 <div class="col-9 project-card-right">
                     <h3>{{project.title}}</h3>
-                    <p>{{project.body}}</p>
+                    <textarea rows="2">{{project.body}}</textarea>
+                    <div class="dots">...</div>
                     <div class="comments-likes-area">
                         <span>Likes: {{project.likes.length}}</span>
                         <span>- Comments: {{project.comments.length}}</span>

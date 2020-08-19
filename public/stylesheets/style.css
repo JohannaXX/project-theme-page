@@ -69,6 +69,19 @@ nav ul li {
   border-radius: 50%;
 }
 
+#index-page-container .project-card-right textarea {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  resize: none;
+  border: none;
+}
+
+#index-page-container .project-card-right .dots {
+  text-align: left;
+  margin: 0;
+}
+
 .project-card {
   margin: 1rem auto;
 }
@@ -113,6 +126,42 @@ nav ul li {
   display: inline-block;
 }
 
+#signup-page-container h2,
+#signup-page-container p {
+  margin: 2rem auto;
+  text-align: center;
+}
+
+#signup-page-container #signup-btn-area {
+  text-align: center;
+}
+
+#login-page-container h2 {
+  margin: 2rem auto;
+  text-align: center;
+}
+
+#login-page-container #login-btn-area {
+  margin: 1rem auto;
+  text-align: center;
+}
+
+#login-page-container #login-btn-area #social-login-btns {
+  margin: 1rem auto;
+}
+
+#user-profile-page img {
+  border-radius: 50%;
+}
+
+#user-profile-page h4 {
+  margin-left: 15px;
+}
+
+#user-profile-page .project-card-right {
+  text-align: left;
+}
+
 #new-project-page-container h3,
 #new-project-page-container p {
   margin: 2rem 0;
@@ -137,30 +186,6 @@ nav ul li {
   background-color: white;
   color: black;
   text-decoration: none;
-}
-
-#signup-page-container h2,
-#signup-page-container p {
-  margin: 2rem auto;
-  text-align: center;
-}
-
-#signup-page-container #signup-btn-area {
-  text-align: center;
-}
-
-#login-page-container h2 {
-  margin: 2rem auto;
-  text-align: center;
-}
-
-#login-page-container #login-btn-area {
-  margin: 1rem auto;
-  text-align: center;
-}
-
-#login-page-container #login-btn-area #social-login-btns {
-  margin: 1rem auto;
 }
 
 #project-details-page .profile-image {

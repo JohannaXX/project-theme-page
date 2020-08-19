@@ -63,11 +63,24 @@ nav {
             margin: 1rem auto;
         }
     }
-
     img {
         width: 150px;
         border-radius: 50%;
     }
+    .project-card-right {
+        textarea {
+            display: block;
+            width: 100%;
+            overflow: hidden;
+            resize: none;
+            border: none;
+        }
+        .dots {
+            text-align: left;
+            margin: 0;
+        }
+    }
+
 }
 
 .project-card {
@@ -106,26 +119,6 @@ nav {
     }
 }
 
-#new-project-page-container {
-    h3,
-    p {
-        margin: 2rem 0;
-    }
-
-    #btn-area {
-        text-align: center;
-
-        #submit-new-project-btn {
-            display: inline-block;
-            @include button-inactive()
-        }
-        
-        #submit-new-project-btn:hover {
-            @include button-active()
-        }
-    }
-}
-
 #signup-page-container {
     h2,
     p {
@@ -153,6 +146,38 @@ nav {
     }
 }
 
+#user-profile-page {
+    img {
+        border-radius: 50%;
+    }
+    h4 {
+        margin-left: 15px;
+    }
+    .project-card-right {
+        text-align: left;
+    }
+}
+
+#new-project-page-container {
+    h3,
+    p {
+        margin: 2rem 0;
+    }
+
+    #btn-area {
+        text-align: center;
+
+        #submit-new-project-btn {
+            display: inline-block;
+            @include button-inactive()
+        }
+        
+        #submit-new-project-btn:hover {
+            @include button-active()
+        }
+    }
+}
+
 #project-details-page {
     .profile-image {
         border-radius: 50%;
@@ -176,6 +201,8 @@ nav {
         }
     }
 }
+
+
 
 
 

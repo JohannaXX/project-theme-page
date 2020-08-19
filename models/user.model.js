@@ -43,7 +43,7 @@ const userSchema = new mongoose.Schema({
   },
   bio: {
     type: String,
-    maxlength: 100
+    maxlength: 200
   },
   activation: {
     active: {
@@ -59,8 +59,14 @@ const userSchema = new mongoose.Schema({
     slack: String,
     google: String
   },
-  googleID: String,
-  projects: [String]
+  googleID: String
+});
+
+userSchema.virtual('projects', {
+  ref: 'Project',
+  localField: '_id',
+  foreignField: 'user',
+  justOne: false,
 });
 
 userSchema.pre('save', function (next) {

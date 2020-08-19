@@ -8,16 +8,28 @@
             <div>
                 <button onclick="history.back()">Back</button>
             </div>
+
             <h3>{{project.title}}</h3>
             <p>{{project.body}}</p>
+
+            {{#if project.image}}
+                <img class="project-image" src="{{project.image}}" alt="project image"> 
+            {{/if}}
+
             <div class="comments-likes-area">
                 <p> Likes: {{project.likes.length}}</p>
                 <a href="/project/{{project._id}}/like">Like</a>
             </div>
+
+            {{#if user }}
+                <div id="comment-btn-area">
+                    <a href="/project/{{project._id}}/edit">Edit</a>
+                    <a href="/project/{{project._id}}/delete">Delete</a>
+                </div>
+            {{/if}}
+
             <div class="comments-header">Comments:</div>
-            <div id="comment-btn-area">
-                <a href="">Add comment</a>
-            </div>
+
             {{#if project.comments}}
                 {{#each project.comments as |comment|}}
                     <div class="row project-card comment-container">
@@ -27,11 +39,24 @@
                         </div>
                         <div class="col-9 comment-text">
                             <p>{{comment.text}}</p>
+                            <a href="/comment/{{comment._id}}">View</a>
                         </div>
                     
                     </div>
                 {{/each}}
             {{/if}}
+
+            <form action="/newcomment/{{project._id}}" method="POST">
+
+                <label for="comment">Comment post:</label>
+                <textarea name="comment" type="text" class="form-control {{#if error.bio }}is-invalid{{/if}}" id="comment"
+                placeholder="Write comment" rows="5"></textarea>
+                
+                <div id="comment-btn-area">
+                    <button type="submit">Add comment</button>
+                </div>
+            </form>
+
             
         </div>
     </div>
