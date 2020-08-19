@@ -14,12 +14,12 @@
         {{#each projects as |project|}}
             
             <div class="row project-card">
-                <div class="col-3 project-card-left">
+                <div class="col-sm-12 col-lg-3 project-card-left">
                     {{!-- <img style="width: 200px;" src="https://res.cloudinary.com/dlydr4pqa/image/upload/v1595671073/tweethack/k8mjdzah3qqxnebmxdlr.png" alt="profile image"> --}}
                     <img src="{{project.user.avatar}}" alt="profile image"> 
                     <p>{{project.user.name}}</p>
                 </div>
-                <div class="col-9 project-card-right">
+                <div class="col-sm-12 col-lg-9 project-card-right">
                     <h3>{{project.title}}</h3>
                     <textarea rows="2">{{project.body}}</textarea>
                     <div class="dots">...</div>

@@ -1,5 +1,6 @@
 const Project = require("../models/project.model");
 const User = require("../models/user.model");
+const Like = require("../models/like.model");
 
 module.exports.showNewProjectForm = (req, res, next) => {
     res.render('projects/projectform')
@@ -119,23 +120,23 @@ module.exports.deleteProject = (req, res, next) => {
 
 
 module.exports.like = (req, res, next) => {
-  res.send(req.params);
-  
-  const params = { user: req.currentUser._id, project: req.params.id  };
+  const user = req.currentUser.id;
+  const project = req.params.id;
+  const params = { user , project };
 
   Like.findOne(params)
     .then(like => {
       if (like) {
         Like.findByIdAndRemove(like._id)
           .then(() => {
-            res.json({ like: -1 });
+            res.redirect(`/project/${project}`)
           })
           .catch(err => next(err));
       } else {
         const newLike = new Like(params);
         newLike.save()
           .then(() => {
-            res.json({ like: 1 });
+            res.redirect(`/project/${project}`)
           })
           .catch(err => next(err));;
       }

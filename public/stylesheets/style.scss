@@ -182,12 +182,17 @@ nav {
     .profile-image {
         border-radius: 50%;
     }
-    .comments-header {
-        text-align: center;
-        margin: 1rem auto 0.5rem;
+    .project-image {
+        margin: 1rem 0;
+        max-width: 100%;
+        height: auto;
     }
     .comment-btn-area {
         text-align: center;
+    }
+    .comments-header {
+        text-align: center;
+        margin: 1rem auto 0.5rem;
     }
     .comment-container {
         padding: 1rem 0;
@@ -201,6 +206,29 @@ nav {
         }
     }
 }
+
+#about-page {
+    margin-top: 2rem;
+    text-align: center;
+    #uni-opening-hours {
+        display: block;
+
+        table {
+            margin: auto;
+            td {
+                padding: 0.5rem 1rem;
+            }
+        }
+    }
+
+    #map {
+        margin: 2rem auto;
+        width: 500px;
+        height: 500px;
+        border: 1px solid grey;
+    }
+}
+
 
 
 

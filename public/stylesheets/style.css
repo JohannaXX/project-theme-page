@@ -192,13 +192,19 @@ nav ul li {
   border-radius: 50%;
 }
 
-#project-details-page .comments-header {
-  text-align: center;
-  margin: 1rem auto 0.5rem;
+#project-details-page .project-image {
+  margin: 1rem 0;
+  max-width: 100%;
+  height: auto;
 }
 
 #project-details-page .comment-btn-area {
   text-align: center;
+}
+
+#project-details-page .comments-header {
+  text-align: center;
+  margin: 1rem auto 0.5rem;
 }
 
 #project-details-page .comment-container {
@@ -213,5 +219,29 @@ nav ul li {
 
 #project-details-page .comment-container .comment-text {
   text-align: left;
+}
+
+#about-page {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+#about-page #uni-opening-hours {
+  display: block;
+}
+
+#about-page #uni-opening-hours table {
+  margin: auto;
+}
+
+#about-page #uni-opening-hours table td {
+  padding: 0.5rem 1rem;
+}
+
+#about-page #map {
+  margin: 2rem auto;
+  width: 500px;
+  height: 500px;
+  border: 1px solid grey;
 }
 /*# sourceMappingURL=style.css.map */

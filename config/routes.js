@@ -33,7 +33,7 @@ router.get('/project/:id', projectController.viewProject);
 router.get('/project/:id/edit', sessionMiddleware.isAuthenticated, projectController.showEditProject);
 router.post('/project/:id/edit', sessionMiddleware.isAuthenticated, upload.single('image'), projectController.updateProject);
 router.get('/project/:id/delete', sessionMiddleware.isAuthenticated, projectController.deleteProject);
-router.get('/project/:id/like', projectController.like);
+router.get('/project/:id/like', sessionMiddleware.isAuthenticated, projectController.like);
 
 router.post('/newcomment/:project', sessionMiddleware.isAuthenticated, commentController.createComment);
 router.get('/comment/:id', sessionMiddleware.isAuthenticated, commentController.showCommentDetail);
