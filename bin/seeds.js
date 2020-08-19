@@ -17,53 +17,56 @@ Promise.all([
         console.log('Database deleted!')
 
         for (let i = 0; i < 30; i++) {
-        const user = new User({
-            name: faker.name.findName(),
-            email: faker.internet.email(),
-            username: faker.internet.userName(),
-            avatar: faker.image.avatar(),
-            bio: faker.lorem.sentence(),
-            createdAt: faker.date.past(),
-        });
+            const user = new User({
+                name: faker.name.findName(),
+                email: faker.internet.email(),
+                username: faker.internet.userName(),
+                avatar: faker.image.avatar(),
+                bio: faker.lorem.sentence(),
+                createdAt: faker.date.past(),
+            });
 
-        user.save()
-            .then(user => {
-                userIds.push(user._id);
+            user.save()
+                .then(user => {
+                    userIds.push(user._id);
 
-                const project = new Project({
-                    user: user._id,
-                    title: faker.lorem.words() + ' ' + Math.floor(Math.random() * 3),
-                    body: faker.lorem.paragraphs(),
-                    image: faker.image.technics(),
-                    createdAt: faker.date.past(),
-                });
+                    const project = new Project({
+                        user: user._id,
+                        title: faker.lorem.words() + ' ' + Math.floor(Math.random() * 3),
+                        body: faker.lorem.paragraphs(),
+                        image: faker.image.technics(),
+                        createdAt: faker.date.past(),
+                    });
 
-                project.save()
-                    .then(p => {
+                    project.save()
+                        .then(p => {
 
-                        for (let j = 0; Math.floor(Math.random() * 10); j++) {
-                            const comments = new Comment({
-                                user: userIds[Math.floor(Math.random() * userIds.length)],
-                                project: p._id,
-                                text: faker.lorem.text(),
-                                createdAt: faker.date.past(),
-                            });
+                            for (let j = 0; Math.floor(Math.random() * 10); j++) {
+                                const comments = new Comment({
+                                    user: userIds[Math.floor(Math.random() * userIds.length)],
+                                    project: p._id,
+                                    text: faker.lorem.text(),
+                                    createdAt: faker.date.past(),
+                                });
 
-                            comments.save();
-                        }
+                                comments.save();
+                            }
 
-                        for (let k = 0; Math.floor(Math.random() * 50); k++) {
-                            const likes = new Like({
-                                user: userIds[Math.floor(Math.random() * userIds.length)],
-                                project: p._id,
-                                createdAt: faker.date.past(),
-                            });
-    
-                            likes.save();
-                        }
-                    })
-            
-            })
+                            for (let k = 0; Math.floor(Math.random() * 50); k++) {
+                                const likes = new Like({
+                                    user: userIds[Math.floor(Math.random() * userIds.length)],
+                                    project: p._id,
+                                    createdAt: faker.date.past(),
+                                });
+        
+                                likes.save();
+                            }
+                        })
+                        .catch(err => next(err));
+                
+                })
+                .catch(err => next(err));
+                
         }
     })
 

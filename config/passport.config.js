@@ -10,8 +10,6 @@ const slack = new SlackStrategy(
     callbackUrl: "/auth/slack",
   },
   (accessToken, refreshToken, profile, next) => {
-    console.log("Slack account details:", profile);
-
     User.findOne({ "social.slack": profile.id })
       .then((user) => {
         if (user) {
@@ -49,11 +47,8 @@ const google = new GoogleStrategy(
   },
 
   (accessToken, refreshToken, profile, next) => {
-    console.log("Google account details:", profile);
-
     User.findOne({ email: profile.emails[0].value })
       .then(user => {
-        console.log('Google user: ', user);
         if (user) {
           next(null, user);
           return;

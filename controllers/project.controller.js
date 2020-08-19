@@ -21,8 +21,6 @@ module.exports.createNewProject = (req, res, next) => {
   const projectParams = req.body;
   projectParams.user = req.currentUser;
   projectParams.image = req.file ? req.file.path : undefined;
-
-  console.log(projectParams);
   
   const project = new Project(projectParams);
 
@@ -84,7 +82,6 @@ module.exports.updateProject = (req, res, next) => {
           Project.findByIdAndUpdate(req.params.id, projectParams, { runValidators: true, new: true })
             .then(project => {
                 if (project) {
-                    console.log('updated Project: ', project);
                     res.redirect(`/project/${project._id}`)
                 } else {
                     res.redirect('/projects')
